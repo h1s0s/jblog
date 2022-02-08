@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 		<div id="header" class="clearfix">
-			<h1><a href="">정우성의 블로그입니다.</a></h1>
+			<h1><a href="">${requestScope.blogVo.blogTitle}</a></h1>
 			<ul class="clearfix">
 				<!-- 로그인 전 메뉴 -->
 				<li><a class="btn_s" href="">로그인</a></li>
