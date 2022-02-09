@@ -29,7 +29,6 @@ public class UserService {
 		//블로그 생성
 		BlogVo blogVo = new BlogVo();
 		blogVo.setId(userVo.getId());
-		blogVo.setBlogTitle(userVo.getUserName()+"의 블로그입니다.");
 		blogVo.setLogoFile("spring-logo.jpg");
 		blogDao.setBlog(blogVo);
 		

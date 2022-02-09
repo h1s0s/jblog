@@ -31,18 +31,17 @@
 		<div id="content" class="clearfix">
 			<div id="profilecate_area">
 				<div id="profile">
-
-					<img id="proImg" src="${pageContext.request.contextPath}/upload/${requestScope.bMap.blogVo.logoFile}">
-
-					<div id="nick">${requestScope.bMap.blogVo.userName}(${requestScope.bMap.blogVo.id})님</div>
+					<img id="proImg" src="${pageContext.request.contextPath}/upload/${requestScope.blogVo.logoFile}">
+					
+					<div id="nick">${requestScope.blogVo.userName}(${requestScope.blogVo.id})님</div>
 				</div>
 				<div id="cate">
 					<div class="text-left">
 						<strong>카테고리</strong>
 					</div>
 					<ul id="cateList" class="text-left">
-						<c:forEach items="${bMap.categoryList}" var="vo">
-							<li><a href="">${vo.cateName}</a></li>
+						<c:forEach items="${requestScope.categoryList}" var="vo">
+							<li><a href="${pageContext.request.contextPath}/catePost?cateNo=${vo.cateNo}">${vo.cateName}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -50,7 +49,7 @@
 			<!-- profilecate_area -->
 			<div id="post_area">
 				<c:choose>
-					<c:when test="${empty requestScope.bMap.postVo}">
+					<c:when test="${empty requestScope.postVo}">
 						<div id="postBox" class="clearfix">
 							<div id="postTitle" class="text-left">
 								<strong>등록된 글이 없습니다.</strong>
@@ -65,16 +64,16 @@
 					<c:otherwise>
 						<div id="postBox" class="clearfix">
 							<div id="postTitle" class="text-left">
-								<strong>${requestScope.bMap.postVo.postTitle}</strong>
+								<strong>${requestScope.postVo.postTitle}</strong>
 							</div>
 							<div id="postDate" class="text-left">
-								<strong>${requestScope.bMap.postVo.regDate}</strong>
+								<strong>${requestScope.postVo.regDate}</strong>
 							</div>
-							<div id="postNick">${requestScope.bMap.blogVo.userName}(${requestScope.bMap.blogVo.id})님</div>
+							<div id="postNick">${requestScope.blogVo.userName}(${requestScope.blogVo.id})님</div>
 						</div>
 						<!-- //postBox -->
 
-						<div id="post">${requestScope.bMap.postVo.postContent}</div>
+						<div id="post">${requestScope.postVo.postContent}</div>
 						<!-- //post -->
 					</c:otherwise>
 				</c:choose>
@@ -88,7 +87,7 @@
 							<col style="">
 							<col style="width: 20%;">
 						</colgroup>
-						<c:forEach items="${requestScope.bMap.postList}" var="vo">
+						<c:forEach items="${requestScope.postList}" var="vo">
 							<tr>
 								<td class="text-left"><a href="">${vo.postTitle}</a></td>
 								<td class="text-right">${vo.regDate}</td>

@@ -2,18 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div id="header" class="clearfix">
-	<c:choose>
-		<c:when test="${empty requestScope.blogVo}">
-			<h1>
-				<a href="${pageContext.request.contextPath}/${requestScope.bMap.blogVo.id}/">${requestScope.bMap.blogVo.blogTitle}</a>
-			</h1>
-		</c:when>
-		<c:otherwise>
-			<h1>
-				<a href="${pageContext.request.contextPath}/${requestScope.blogVo.id}/">${requestScope.blogVo.blogTitle}</a>
-			</h1>
-		</c:otherwise>
-	</c:choose>
+	<h1>
+		<a href="${pageContext.request.contextPath}/${requestScope.blogVo.id}/">${requestScope.blogVo.blogTitle}</a>
+	</h1>
 	<ul class="clearfix">
 		<c:choose>
 			<c:when test="${empty sessionScope.authUser}">

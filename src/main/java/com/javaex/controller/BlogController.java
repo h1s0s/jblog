@@ -1,5 +1,6 @@
 package com.javaex.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,12 +30,22 @@ public class BlogController {
 	public String blog(@PathVariable("id") String id, Model model) {
 		System.out.println("[BlogController.blog]");
 		Map<String, Object> bMap = blogService.getBlog(id);
-		BlogVo blogVo = (BlogVo) bMap.get("blogVo");
-		System.out.println(blogVo);
-
-		if (blogVo != null) {
+		BlogVo authVo = (BlogVo)bMap.get("blogVo");
+		
+		if (authVo != null) {
 			System.out.println("[블로그 접속 성공]");
-			model.addAttribute("bMap", bMap);
+			
+			List<CategoryVo> categoryList = (List<CategoryVo>)bMap.get("categoryList");
+			List<PostVo> postList = (List<PostVo>) bMap.get("postList");
+			BlogVo blogVo = (BlogVo)bMap.get("blogVo");
+			PostVo postVo= (PostVo) bMap.get("postVo");
+			
+			System.out.println(blogVo);
+			model.addAttribute("blogVo", blogVo);
+			model.addAttribute("categoryList", categoryList);
+			model.addAttribute("postList", postList);
+			model.addAttribute("postVo", postVo);
+			
 			return "/blog/blog-main";
 		} else {
 			System.out.println("[실패:존재하지 않는 블로그]");
@@ -86,19 +97,20 @@ public class BlogController {
 		List<CategoryVo> categoryList = blogService.getCategory(id);
 		return categoryList;
 	}
-
+	
 	// 카테고리 선택
-	@RequestMapping("/{id}/{cateNo}")
-	public String addCategory(@PathVariable("id") String id,
-							  @PathVariable("cateNo") int cateNo) {
-		System.out.println("[BlogController.addCategory]");
+	@RequestMapping("/catePost")
+	public String catePost(@RequestParam("cateNo") int cateNo, Model model) {
+		System.out.println("[BlogController.catePost]");
+		System.out.println(cateNo);
 		CategoryVo categoryVo = new CategoryVo();
-		
-		categoryVo.setId(id);
-		categoryVo.setCateNo(cateNo);
-		blogService.getPost(categoryVo);
 
-		return "/blog/main";
+		categoryVo.setCateNo(cateNo);
+
+		List<PostVo> postList = blogService.getPost(categoryVo);
+		model.addAttribute("postList", postList);
+
+		return "/blog/blog-main";
 	}
 
 	// 카테고리 추가
