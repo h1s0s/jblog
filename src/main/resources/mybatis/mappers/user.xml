@@ -6,10 +6,19 @@
 	<select id="getUser" parameterType="UserVo" resultType="UserVo">
 		<![CDATA[
 			select 	userNo,
+					id,
 					userName
 			from	users
 			where	id = #{id}
 			and		password = #{password}
+		]]>
+	</select>
+	
+	<select id="getId" parameterType="UserVo" resultType="string">
+		<![CDATA[
+			select 	id				
+			from	users
+			where	id = #{id}
 		]]>
 	</select>
 

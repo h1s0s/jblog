@@ -9,7 +9,7 @@
 					u.userName,
 					b.blogTitle,
 					b.logoFile
-			from	blog b, user u
+			from	blog b, users u
 			where	u.id = b.id
 			and		b.id = #{id}
 		]]>
@@ -21,5 +21,14 @@
 			values (#{id}, #{blogTitle}, #{logoFile})
 		]]>
 	</insert>
+	
+	<update id="update" parameterType="BlogVo">
+		<![CDATA[
+			update  blog
+			set     blogTitle = #{blogTitle}, 
+        			logoFile = #{logoFile}
+			where   id = #{id}
+		]]>
+	</update>
 	
 </mapper>

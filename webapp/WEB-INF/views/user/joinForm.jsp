@@ -37,7 +37,7 @@
 					</colgroup>
 					<tr>
 						<td><label for="txtId">아이디</label></td>
-						<td><input id="txtId" type="text" name="id"></td>
+						<td><input id="txtId" type="text" name="id" value=""></td>
 						<td><button id="btnIdCheck" type="button">아이디체크</button></td>
 					</tr>
 					<tr>
@@ -73,6 +73,33 @@
 	</div>
 
 </body>
+<script type="text/javascript">
+	//중복체크를 클릭할때
+	("#btnIdCheck").on("click", function(){
+		console.log("클릭");
+		var id = $("#txtId").val();
+		var userVo = {
+			id : id
+		}
+		$.ajax({
+			url : "${pageContext.request.contextPath}/user/idCheck",
+			type : "post",
+			data : userVo,
 
+			//응답받을때
+			success : function(result) {
+				console.log(userVo);
+				if (userVo.id == null) {//중복 없음
+					success();
+				} else {//중복 있음
+					fail();
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+	})
+</script>
 
 </html>

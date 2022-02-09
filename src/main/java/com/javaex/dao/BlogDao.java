@@ -26,4 +26,9 @@ public class BlogDao {
 		int count = sqlSession.insert("blog.setBlog",blogVo);
 		System.out.println("["+count+"건이 생성되었습니다.(blog)]");
 	}
+	
+	public void update(BlogVo blogVo) {
+		System.out.println("[BlogDao.update]");
+		sqlSession.update("blog.update", blogVo);
+	}
 }
