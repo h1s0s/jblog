@@ -28,6 +28,12 @@ public class CategoryDao {
 		return sqlSession.selectList("category.getList", id);
 	}
 	
+	//카테고리 리스트 가져오기
+	public List<CategoryVo> getCategoryDesc(String id){
+		System.out.println("[CategoryDao.getCategoryDesc]");
+		return sqlSession.selectList("category.getListDesc", id);
+	}
+	
 	//카테고리 추가
 	public int addCategory(CategoryVo categoryVo) {
 		System.out.println("[CategoryDao.addCategory]");

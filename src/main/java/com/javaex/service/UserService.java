@@ -46,9 +46,9 @@ public class UserService {
 		String resultId = userDao.getId(userVo);
 		
 		if(resultId == null) {
-			return "fail";
-		} else {
 			return "success";
+		} else {
+			return "fail";
 		}
 	}
 	

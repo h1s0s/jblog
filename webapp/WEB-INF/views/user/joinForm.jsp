@@ -42,7 +42,8 @@
 					</tr>
 					<tr>
 						<td></td>
-						<td id="tdMsg" colspan="2">사용할 수 있는 아이디 입니다.</td>
+						
+						<td id="tdMsg" colspan="2"><div id="msg"></div></td>
 					</tr>
 					<tr>
 						<td><label for="txtPassword">패스워드</label></td>
@@ -75,7 +76,7 @@
 </body>
 <script type="text/javascript">
 	//중복체크를 클릭할때
-	("#btnIdCheck").on("click", function(){
+	$("#btnIdCheck").on("click", function(){
 		console.log("클릭");
 		var id = $("#txtId").val();
 		var userVo = {
@@ -88,18 +89,44 @@
 
 			//응답받을때
 			success : function(result) {
-				console.log(userVo);
-				if (userVo.id == null) {//중복 없음
-					success();
+				if (result == 'success') {//중복 없음
+					var str = "";
+					str += '사용할 수 있는 아이디 입니다.';
+					$("#msg").html(str);
 				} else {//중복 있음
-					fail();
+					var str = "";
+					str += '다른 아이디로 가입해 주세요.';
+					$("#msg").html(str);
 				}
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);
 			}
 		});
-	})
+	});
+	
+	//회원가입 버튼을 클릭할때
+	$("#btnJoin").on("click", function() {
+		console.log("click");
+		var id = $("#txtId").val();
+		var pw = $("#txtPassword").val();
+		var	userName = $("#txtUserName").val();
+		console.log(id);
+		console.log(pw);
+		console.log(userName);
+		if (id == '') {
+			alert("아이디를 입력해주세요");
+			return false;//하던일을 멈춤, 없으면 하던일을 함
+		} 
+		if (pw == '') {
+			alert("패스워드를 입력해주세요");
+			return false;
+		}
+		if (userName == '') {
+			alert("이름을 입력해주세요");
+			return false;
+		}
+	});
 </script>
 
 </html>

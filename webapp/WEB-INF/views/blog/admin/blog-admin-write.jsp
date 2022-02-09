@@ -54,8 +54,8 @@
 				      		<td>
 				      			<select name="cateNo">
 				      				<!-- 카테고리 리스트 영역 -->
-				      				<c:forEach items="${requestScope.bMap.categoryList}" var="vo">
-				      					<option value="${vo.cateName}">${vo.cateName}</option>
+				      				<c:forEach items="${requestScope.categoryList}" var="vo">
+				      					<option value="${vo.cateNo}">${vo.cateName}</option>
 				      				</c:forEach>
 				      				<!-- 카테고리 리스트 영역 -->
 				      			</select>

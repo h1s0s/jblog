@@ -5,10 +5,10 @@
 <mapper namespace="blog">
 	<select id="getBlog" parameterType="string" resultType="BlogVo">
 		<![CDATA[
-			select 	b.id,
-					u.userName,
-					b.blogTitle,
-					b.logoFile
+			select 	b.id id,
+					u.userName userName,
+					b.blogTitle blogTitle,
+					b.logoFile logoFile
 			from	blog b, users u
 			where	u.id = b.id
 			and		b.id = #{id}

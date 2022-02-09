@@ -12,10 +12,11 @@
 			            to_char(regDate, 'YYYY/MM/DD') regDate
 			from        post
 			where       rownum <= 5
+			and			cateNo = #{cateNo}
 			order by    postNo desc
 		]]>
 	</select>
-	<select id="getMainOne" parameterType="string" resultType="PostVo">
+	<select id="getMainOne" parameterType="CategoryVo" resultType="PostVo">
 		<![CDATA[
 			select  tb.postNo postNo,
 			        tb.cateNo cateNo,
@@ -29,6 +30,7 @@
 			                    postContent,
 			                    regDate
 			        from        post
+			        where		cateNo = #{cateNo}
 			        order by    postNo desc)tb
 			where   rownum = 1
 		]]>
@@ -43,7 +45,7 @@
 	<insert id="insertPost" parameterType="PostVo">
 		<![CDATA[
 			insert into post
-			values (seq_post_no.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate);
+			values (seq_post_no.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
 		]]>
 	</insert>
 </mapper>

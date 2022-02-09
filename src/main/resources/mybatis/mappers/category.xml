@@ -11,9 +11,21 @@
 				   		description
 			from 		category
 			where 		id = #{id}
+			order by 	cateNo asc
+		]]>
+	</select>
+	<select id="getListDesc" parameterType="string" resultType="CategoryVo">
+		<![CDATA[
+			select 		cateNo,
+				   		id,
+				   		cateName,
+				   		description
+			from 		category
+			where 		id = #{id}
 			order by 	cateNo desc
 		]]>
 	</select>
+	
 	
 	<insert id="setfirst" parameterType="CategoryVo">
 		<![CDATA[

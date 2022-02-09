@@ -8,7 +8,7 @@ body, div, ul, li, dl, dt, ol, h1, h2, h3, h4, h5, h6,
 input, fieldset, legend, p, select, table, th, td, tr,
 textarea, button, form {margin: 0; padding: 0;}
 
-body	{font:15px "맑은 고딕", 돋움, 굴림; text-align:center; }
+body	{font:15px "맑은 고딕", "Malgun Gothic", 돋움, 굴림; text-align:center; }
 ul, ol	{list-style-type: none; }
 a:link {text-decoration: none; color: #000000; }
 a:visited {text-decoration: none; color: #000000; }
@@ -142,7 +142,7 @@ div#footer		{ color:#666 }
 
 /* 개인블로그 레이아웃 */
 #wrap 								{width: 1000px; margin: 0px auto;}
-#wrap #header 						{height: 90px; margin: 0px 0px 10px 0px; padding: 30px 10px 10px 10px;  background-color: #26AA46;}
+#wrap #header 						{height: 120px; margin: 0px 0px 10px 0px; padding: 30px 10px 10px 10px;  background-color: #26AA46;}
 
 #wrap #content						{margin: 0px 0px 30px 0px; background-color: #ffffff; }
 #wrap #content #profilecate_area	{width: 190px; float:left; margin: 0px 10px 0px 0px; background-color: #ffffff; }
@@ -152,7 +152,7 @@ div#footer		{ color:#666 }
 
 
 /* 개인블로그 해더 */
-#header 		{height: 90px; padding: 30px 10px 10px 10px;}
+#header 		{height: 90px; padding: 30px 10px 50px 10px;}
 #header h1		{margin: 0px 0px 0px 0px;}
 #header h1>a 	{text-align:center; font-size: 35px; color:#ffffff }
 #header ul		{float: right; margin: 18px 0px 0px 0px;}

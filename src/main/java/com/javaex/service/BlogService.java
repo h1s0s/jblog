@@ -43,15 +43,34 @@ public class BlogService {
 		List<CategoryVo> categoryList = categoryDao.getCategory(id);
 		bMap.put("categoryList", categoryList);
 		
-		//전체 포스트(메인화면용, 카테고리 상관 없이)
-		List<PostVo> postList = postDao.getMainList(id);
+		
+		//전체 포스트(메인화면용, 가장 위에 카테고리의 글)
+		CategoryVo categoryVo = new CategoryVo();
+		categoryVo.setId(id);
+		categoryVo.setCateNo(categoryList.get(0).getCateNo()); //가장 최상단 카테고리
+		
+		List<PostVo> postList = postDao.getMainList(categoryVo);
+		
 		bMap.put("postList", postList);
 		
-		//가장 최신 포스트(메인화면용, 카테고리 상관 없이)
-		PostVo postVo = postDao.getMainOne(id);
+		//가장 최신 포스트(메인화면용, 가장 위의 카테고리의 가장 최신 글)
+		PostVo postVo = postDao.getMainOne(categoryVo);
 		bMap.put("postVo", postVo);
 		
 		return bMap;
+	}
+	//카테고리 리스트 가져오기
+	public List<CategoryVo> getList(String id) {
+		System.out.println("[BlogService.getList]");
+		return categoryDao.getCategory(id);
+	}
+	
+	//카테고리 선택시 포스트 가져오기
+	public List<PostVo> getPost(CategoryVo categoryVo){
+		System.out.println("[BlogService.getPost]");
+		
+		//postDao.getPostList();
+		return null;
 	}
 	
 	//블로그 헤더 정보
@@ -102,7 +121,7 @@ public class BlogService {
 		System.out.println("[BlogService.getCategory]");
 		
 		//카테고리
-		List<CategoryVo> categoryList = categoryDao.getCategory(id);
+		List<CategoryVo> categoryList = categoryDao.getCategoryDesc(id);
 		
 		return categoryList;
 	}
