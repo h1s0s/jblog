@@ -121,7 +121,7 @@
 		str += '<tr>';
 		str += '	<td>'+categoryVo.cateNo+'</td>';
 		str += '	<td>'+categoryVo.cateName+'</td>';
-		str += '	<td>포스트수</td>';
+		str += '	<td>'+categoryVo.count+'</td>';
 		str += '	<td>'+categoryVo.description+'</td>';
 		str += '	<td class="text-center"><img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>';
 		str += '</tr>';

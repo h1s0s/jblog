@@ -16,13 +16,18 @@
 	</select>
 	<select id="getListDesc" parameterType="string" resultType="CategoryVo">
 		<![CDATA[
-			select 		cateNo,
-				   		id,
-				   		cateName,
-				   		description
-			from 		category
+			select 		ca.cateNo cateNo,
+			            ca.id id,
+			            co.count count,
+			            ca.cateName cateName,
+			            ca.description description
+			from 		category ca, (select count(*) count,
+			                                 cateNo
+			                            from post
+			                            group by cateNo)co
 			where 		id = #{id}
-			order by 	cateNo desc
+			and         ca.cateNo = co.cateNo
+			order by 	ca.cateNo desc
 		]]>
 	</select>
 	
