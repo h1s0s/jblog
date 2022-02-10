@@ -1,6 +1,5 @@
 package com.javaex.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,8 +66,9 @@ public class BlogController {
 
 	// 블로그 수정
 	@RequestMapping("/{id}/updateBlog")
-	public String updateBlog(@PathVariable("id") String id, @RequestParam("file") MultipartFile file,
-			@ModelAttribute BlogVo blogVo) {
+	public String updateBlog(@PathVariable("id") String id, 
+							@RequestParam("file") MultipartFile file,
+							@ModelAttribute BlogVo blogVo) {
 		System.out.println("[BlogController.updateBlog]");
 
 		blogVo.setId(id);
@@ -79,12 +79,13 @@ public class BlogController {
 
 	// 블로그 관리페이지-카테고리
 	@RequestMapping("/{id}/admin/category")
-	public String adminCate(@PathVariable("id") String id, Model model) {
+	public String adminCate(@PathVariable("id") String id, 
+							Model model) {
 		System.out.println("[BlogController.adminCate]");
 
 		BlogVo blogVo = blogService.getHeader(id);
 		model.addAttribute("blogVo", blogVo);
-
+		
 		return "/blog/admin/blog-admin-cate";
 	}
 
@@ -99,17 +100,26 @@ public class BlogController {
 	}
 	
 	// 카테고리 선택
-	@RequestMapping("/catePost")
-	public String catePost(@RequestParam("cateNo") int cateNo, Model model) {
+	@RequestMapping("{id}/catePost")
+	public String catePost(@RequestParam("cateNo") int cateNo, 
+							@PathVariable("id") String id,
+							Model model) {
 		System.out.println("[BlogController.catePost]");
 		System.out.println(cateNo);
+		
+		
+		List<PostVo> postList = blogService.getPost(cateNo);
 		CategoryVo categoryVo = new CategoryVo();
-
 		categoryVo.setCateNo(cateNo);
-
-		List<PostVo> postList = blogService.getPost(categoryVo);
+		BlogVo blogVo = blogService.getBlogVo(id);
+		List<CategoryVo> categoryList = blogService.getList(id);
+		
+		PostVo postVo =	blogService.getPostTop(cateNo);//최상단 포스트
 		model.addAttribute("postList", postList);
-
+		model.addAttribute("postVo", postVo);
+		model.addAttribute("blogVo", blogVo);
+		model.addAttribute("categoryList", categoryList);
+		
 		return "/blog/blog-main";
 	}
 
@@ -131,7 +141,8 @@ public class BlogController {
 
 	// 블로그 관리페이지-글쓰기
 	@RequestMapping("/{id}/admin/writeForm")
-	public String PostWriteForm(@PathVariable("id") String id, Model model) {
+	public String PostWriteForm(@PathVariable("id") String id, 
+								Model model) {
 		System.out.println("[BlogController.PostWriteForm]");
 
 		List<CategoryVo> categoryList = blogService.getCategory(id);
@@ -146,7 +157,8 @@ public class BlogController {
 
 	// 글쓰기
 	@RequestMapping("/post/write")
-	public String write(@ModelAttribute PostVo postVo, @RequestParam("id") String id) {
+	public String write(@ModelAttribute PostVo postVo, 
+						@RequestParam("id") String id) {
 		System.out.println("[PostController.write]");
 		blogService.setPost(postVo);
 		String url = "redirect:/" + id + "/admin/writeForm";

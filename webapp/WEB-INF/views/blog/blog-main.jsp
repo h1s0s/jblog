@@ -41,7 +41,7 @@
 					</div>
 					<ul id="cateList" class="text-left">
 						<c:forEach items="${requestScope.categoryList}" var="vo">
-							<li><a href="${pageContext.request.contextPath}/catePost?cateNo=${vo.cateNo}">${vo.cateName}</a></li>
+							<li><a href="${pageContext.request.contextPath}/${requestScope.blogVo.id}/catePost?cateNo=${vo.cateNo}">${vo.cateName}</a></li>
 						</c:forEach>
 					</ul>
 				</div>

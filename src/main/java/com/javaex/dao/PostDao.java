@@ -15,17 +15,18 @@ public class PostDao {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public List<PostVo> getMainList(CategoryVo categoryVo){
+	//카테고리의 전체 포스트 가져오기
+	public List<PostVo> getPostList(int cateNo){
 		System.out.println("[PostDao.getMainList]");
 		
-		return sqlSession.selectList("post.getMainList", categoryVo);
+		return sqlSession.selectList("post.getPostList", cateNo);
 	}
 	
-	//지정 카테고리의 최상단 글 띄우기
-	public PostVo getMainOne(CategoryVo categoryVo){
-		System.out.println("[PostDao.getMainList]");
+	//카테고리의 최상단 글 띄우기
+	public PostVo getPostTop(int cateNo){
+		System.out.println("[PostDao.getPostTop]");
 		
-		return sqlSession.selectOne("post.getMainOne", categoryVo);
+		return sqlSession.selectOne("post.getPostTop", cateNo);
 	}
 	
 	//카테고리 추가

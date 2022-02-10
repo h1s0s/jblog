@@ -49,12 +49,12 @@ public class BlogService {
 		categoryVo.setId(id);
 		categoryVo.setCateNo(categoryList.get(0).getCateNo()); //가장 최상단 카테고리
 		
-		List<PostVo> postList = postDao.getMainList(categoryVo);
+		List<PostVo> postList = postDao.getPostList(categoryVo.getCateNo());
 		
 		bMap.put("postList", postList);
 		
 		//가장 최신 포스트(메인화면용, 가장 위의 카테고리의 가장 최신 글)
-		PostVo postVo = postDao.getMainOne(categoryVo);
+		PostVo postVo = postDao.getPostTop(categoryVo.getCateNo());
 		bMap.put("postVo", postVo);
 		
 		return bMap;
@@ -62,20 +62,35 @@ public class BlogService {
 	//카테고리 리스트 가져오기
 	public List<CategoryVo> getList(String id) {
 		System.out.println("[BlogService.getList]");
+		
 		return categoryDao.getCategory(id);
 	}
 	
-	//카테고리 선택시 포스트 가져오기
-	public List<PostVo> getPost(CategoryVo categoryVo){
+	//카테고리의 전체 포스트 가져오기
+	public List<PostVo> getPost(int cateNo){
 		System.out.println("[BlogService.getPost]");
 		
-		//postDao.getPostList();
-		return null;
+		return postDao.getPostList(cateNo);
+	}
+	
+	//카테고리 선택시 최상위 포스트 가져오기
+	public PostVo getPostTop(int cateNo) {
+		System.out.println("[BlogService.getPostTop]");
+		
+		return postDao.getPostTop(cateNo);
+	}
+
+	//블로그Vo 가져오기
+	public BlogVo getBlogVo(String id) {
+		System.out.println("[BlogService.getBlogVo]");
+		
+		return blogDao.getBlog(id);
 	}
 	
 	//블로그 헤더 정보
 	public BlogVo getHeader(String id) {
 		System.out.println("[BlogService.getHeader]");
+		
 		return blogDao.getBlog(id);
 	}
 	

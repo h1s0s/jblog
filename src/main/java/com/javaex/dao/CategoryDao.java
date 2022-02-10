@@ -22,13 +22,13 @@ public class CategoryDao {
 		System.out.println("["+count+"건이 추가되었습니다.(CategoryDao)]");
 	}
 	
-	//카테고리 리스트 가져오기
+	//카테고리 리스트 가져오기(asc)
 	public List<CategoryVo> getCategory(String id){
 		System.out.println("[CategoryDao.getCategory]");
 		return sqlSession.selectList("category.getList", id);
 	}
 	
-	//카테고리 리스트 가져오기
+	//카테고리 리스트 가져오기(desc)
 	public List<CategoryVo> getCategoryDesc(String id){
 		System.out.println("[CategoryDao.getCategoryDesc]");
 		return sqlSession.selectList("category.getListDesc", id);

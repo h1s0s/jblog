@@ -23,7 +23,7 @@
 
 	<!-- oracle datasource -->
 	<bean id="oracleDatasource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
-		<property name="URL" value="jdbc:oracle:thin:@192.168.0.74:1521:xe" />
+		<property name="URL" value="jdbc:oracle:thin:@192.168.0.50:1521:xe" />
 		<property name="user" value="jblog" />
 		<property name="password" value="jblog" />
 		<property name="connectionCachingEnabled" value="true" />
