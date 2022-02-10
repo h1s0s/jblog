@@ -167,4 +167,17 @@ public class BlogController {
 		String url = "redirect:/" + id + "/admin/writeForm";
 		return url;
 	}
+	
+	// 글 읽기
+	@RequestMapping("{id}/read")
+	public String read(@PathVariable("id") String id,
+			@RequestParam("postNo") int postNo) {
+		System.out.println("[PostController.read]");
+		
+		//blogService.setPost(postVo);
+		//String url = "redirect:/" + id + "/admin/writeForm";
+		
+		String url = "/"+id+"?postNo="+postNo+"/";
+		return url;
+	}
 }
