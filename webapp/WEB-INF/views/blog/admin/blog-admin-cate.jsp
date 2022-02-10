@@ -58,7 +58,7 @@
 					</thead>
 					<tbody id="cateList">
 						<!-- 리스트 영역 -->
-						
+						<!-- 카테고리 리스트 생기는 영역 -->
 						<!-- 리스트 영역 -->
 					</tbody>
 				</table>
@@ -77,7 +77,7 @@
 						<td><input id="cateDesc" type="text" name="desc" value=""></td>
 					</tr>
 				</table>
-					
+
 				<div id="btnArea">
 					<button id="btnAddCate" class="btn_l" type="submit">카테고리추가</button>
 					<input id="cateId" type="hidden" value="${sessionScope.authUser.id}">
@@ -98,32 +98,35 @@
 </body>
 <script type="text/javascript">
 	//페이지가 뿌려지기 전 리스트 출력
-	$(document).ready(function(){
-		$.ajax({
-			url : "${pageContext.request.contextPath}/${sessionScope.authUser.id}/categoryList", 
-			type : "post",
-			success : function(categoryList) {
-				console.log(categoryList);
+	$(document)
+			.ready(
+					function() {
+						$
+								.ajax({
+									url : "${pageContext.request.contextPath}/${sessionScope.authUser.id}/categoryList",
+									type : "post",
+									success : function(categoryList) {
+										console.log(categoryList);
 
-				for (var i = 0; i < categoryList.length; i++) {
-					render(categoryList[i], 'down'); // 방명록리스트 그리기
-				}
+										for (var i = 0; i < categoryList.length; i++) {
+											render(categoryList[i], 'down'); // 방명록리스트 그리기
+										}
 
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		});
-	});
-	
+									},
+									error : function(XHR, status, error) {
+										console.error(status + " : " + error);
+									}
+								});
+					});
+
 	function render(categoryVo, updown) {
 		var str = "";
-		str += '<tr>';
-		str += '	<td>'+categoryVo.cateNo+'</td>';
-		str += '	<td>'+categoryVo.cateName+'</td>';
-		str += '	<td>'+categoryVo.count+'</td>';
-		str += '	<td>'+categoryVo.description+'</td>';
-		str += '	<td class="text-center"><img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>';
+		str += '<tr id="t'+categoryVo.cateNo+'">';
+		str += '	<td>' + categoryVo.cateNo + '</td>';
+		str += '	<td>' + categoryVo.cateName + '</td>';
+		str += '	<td>' + categoryVo.count + '</td>';
+		str += '	<td>' + categoryVo.description + '</td>';
+		str += '	<td class="text-center"><img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg" data-no="'+categoryVo.cateNo+'" data-count="'+categoryVo.count+'"></td>';
 		str += '</tr>';
 
 		if (updown == 'down') {
@@ -134,35 +137,65 @@
 			console.log("방향오류");
 		}
 	};
-	
+
 	//카테고리 추가 버튼 클릭시
-	$("#btnAddCate").on("click", function(){
+	$("#btnAddCate").on("click", function() {
 		console.log("카테고리 추가 클릭");
 		var cateName = $("#cateName").val();
 		var description = $("#cateDesc").val();
 		var id = $("#cateId").val();
-		
+
 		var categoryVo = {
 			id : id,
 			cateName : cateName,
 			description : description
 		};
-		console.log(categoryVo);
-		
+
 		$.ajax({
-			url : "${pageContext.request.contextPath}/addCategory",   
+			url : "${pageContext.request.contextPath}/addCategory",
 			type : "post",
 			data : categoryVo,
-			
+
 			success : function(categoryVo) {
 				render(categoryVo, 'up');
+				
+				$("#cateName").val('');
+				$("#cateDesc").val('');
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);
 			}
 		});
-	})
-	
+	});
+
 	//삭제버튼 클릭시
+	$("#cateList").on("click", ".btnCateDel", function() {
+		console.log("삭제클릭");
+		var $this = $(this);
+		var no = $this.data('no');
+		var count = $this.data('count');
+
+		if (count > 0) {
+			alert("삭제할 수 없습니다.");
+		} else {
+			//ajax 요청
+			$.ajax({
+				url : "${pageContext.request.contextPath}/delCategory",
+				type : "post",
+				//contentType : "application/json",
+				data : {
+					no : no
+				},
+				//dataType : "json",
+				success : function(result) {
+					$('#t' + no).remove();
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			});
+		}
+
+	});
 </script>
 </html>

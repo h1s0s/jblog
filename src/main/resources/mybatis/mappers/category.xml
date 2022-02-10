@@ -31,7 +31,6 @@
 		]]>
 	</select>
 	
-	
 	<insert id="setfirst" parameterType="CategoryVo">
 		<![CDATA[
 			insert into category
@@ -47,4 +46,11 @@
 			values (#{cateNo}, #{id}, #{cateName}, #{description}, sysdate)
 		]]>
 	</insert>
+	
+	<delete id="delCategory" parameterType="int">
+		<![CDATA[
+		delete category
+		where cateNo = #{cateNo}	
+		]]>
+	</delete>
 </mapper>

@@ -43,4 +43,14 @@ public class CategoryDao {
 		
 		return count;
 	}
+	
+	//카테고리 삭제
+	public int delCategory(int cateNo) {
+		System.out.println("[CategoryDao.delCategory]");
+		System.out.println(cateNo);
+		int count = sqlSession.delete("category.delCategory", cateNo);
+		
+		System.out.println("["+count+"건이 삭제되었습니다.(CategoryDao)]");
+		return count;
+	}
 }

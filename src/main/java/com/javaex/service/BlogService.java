@@ -39,10 +39,10 @@ public class BlogService {
 		BlogVo blogVo = blogDao.getBlog(id);
 		bMap.put("blogVo", blogVo);
 		
+		System.out.println("1. id값 : "+id);
 		//카테고리
 		List<CategoryVo> categoryList = categoryDao.getCategory(id);
 		bMap.put("categoryList", categoryList);
-		
 		
 		//전체 포스트(메인화면용, 가장 위에 카테고리의 글)
 		CategoryVo categoryVo = new CategoryVo();
@@ -79,7 +79,14 @@ public class BlogService {
 		
 		return postDao.getPostTop(cateNo);
 	}
+	
+	//카테고리 삭제
+	public int delCategory(int cateNo) {
+		System.out.println("[BlogService.delCategory]");
 
+		return categoryDao.delCategory(cateNo);	
+	}
+	
 	//블로그Vo 가져오기
 	public BlogVo getBlogVo(String id) {
 		System.out.println("[BlogService.getBlogVo]");

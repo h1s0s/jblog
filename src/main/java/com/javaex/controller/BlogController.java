@@ -134,9 +134,12 @@ public class BlogController {
 	}
 
 	// 카테고리 삭제
+	@ResponseBody
 	@RequestMapping("/delCategory")
-	public void delCategory(@ModelAttribute CategoryVo categoryVo) {
+	public int delCategory(@RequestParam("no") int cateNo) {
 		System.out.println("[BlogController.delCategory]");
+		int count = blogService.delCategory(cateNo);
+		return count;
 	}
 
 	// 블로그 관리페이지-글쓰기
