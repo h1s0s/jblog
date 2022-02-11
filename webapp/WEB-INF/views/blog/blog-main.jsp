@@ -89,7 +89,7 @@
 						</colgroup>
 						<c:forEach items="${requestScope.postList}" var="vo">
 							<tr>
-								<td class="text-left"><a href="">${vo.postTitle}</a></td>
+								<td class="text-left"><a href="${pageContext.request.contextPath}/${requestScope.blogVo.id}/read/${requestScope.cateVo.cateNo}?postNo=${vo.postNo}">${vo.postTitle}</a></td>
 								<td class="text-right">${vo.regDate}</td>
 							</tr>
 						</c:forEach>
