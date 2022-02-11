@@ -29,6 +29,13 @@ public class PostDao {
 		return sqlSession.selectOne("post.getPostTop", cateNo);
 	}
 	
+	//포스트 읽기
+	public PostVo getPost(int postNo) {
+		System.out.println("[PostDao.getPost]");
+		
+		return sqlSession.selectOne("post.getPost", postNo);
+	}
+	
 	//카테고리 추가
 	public int insertPost(PostVo postVo) {
 		System.out.println("[PostDao.insertPost]");

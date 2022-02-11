@@ -169,13 +169,25 @@ public class BlogController {
 	}
 	
 	// 글 읽기
-	@RequestMapping("{id}/read")
+	@RequestMapping("{id}/read/{cateNo}")
 	public String read(@PathVariable("id") String id,
-			@RequestParam("postNo") int postNo) {
+					   @PathVariable("cateNo") int cateNo,
+					   @RequestParam("postNo") int postNo,
+					   Model model) {
 		System.out.println("[PostController.read]");
 		
-		//blogService.setPost(postVo);
-		//String url = "redirect:/" + id + "/admin/writeForm";
+		List<PostVo> postList = blogService.getPost(cateNo);
+		CategoryVo categoryVo = new CategoryVo();
+		categoryVo.setCateNo(cateNo);
+		BlogVo blogVo = blogService.getBlogVo(id);
+		List<CategoryVo> categoryList = blogService.getList(id);
+		PostVo postVo =	blogService.read(postNo);
+		
+		model.addAttribute("postList", postList);
+		model.addAttribute("categoryVo", categoryVo);
+		model.addAttribute("blogVo", blogVo);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("postVo", postVo);
 		
 		String url = "/"+id+"?postNo="+postNo+"/";
 		return url;

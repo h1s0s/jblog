@@ -34,6 +34,17 @@
 			where   rownum = 1
 		]]>
 	</select>
+	<select id="getPost" parameterType="int" resultType="PostVo">
+		<![CDATA[
+			select  postNo,
+			        cateNo,
+			        postTitle,
+			        postContent,
+			        to_char(regDate, 'YYYY/MM/DD') regDate
+			from    post
+			where   postNo = #{postNo}
+		]]>
+	</select>
 	<select id="postCnt" parameterType="int" resultType="int">
 	<![CDATA[
 			select count(*)

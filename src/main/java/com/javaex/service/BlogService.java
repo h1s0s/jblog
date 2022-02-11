@@ -80,6 +80,13 @@ public class BlogService {
 		return postDao.getPostTop(cateNo);
 	}
 	
+	//포스트 읽기
+	public PostVo read(int postNo) {
+		System.out.println("[BlogService.getPost]");
+		
+		return postDao.getPost(postNo);
+	}
+	
 	//카테고리 삭제
 	public int delCategory(int cateNo) {
 		System.out.println("[BlogService.delCategory]");
