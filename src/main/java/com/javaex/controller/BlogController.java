@@ -189,7 +189,7 @@ public class BlogController {
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("postVo", postVo);
 		
-		String url = "/"+id+"?postNo="+postNo+"/";
+		String url = "redirect:/"+id+"/";
 		return url;
 	}
 }
