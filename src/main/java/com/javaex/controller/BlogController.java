@@ -39,11 +39,15 @@ public class BlogController {
 			List<PostVo> postList = (List<PostVo>) bMap.get("postList");
 			BlogVo blogVo = (BlogVo) bMap.get("blogVo");
 			PostVo postVo = (PostVo) bMap.get("postVo");
-
+			CategoryVo categoryVo = (CategoryVo)bMap.get("categoryVo");
+			
+			System.out.println(categoryVo);
+			
 			model.addAttribute("blogVo", blogVo);
 			model.addAttribute("categoryList", categoryList);
 			model.addAttribute("postList", postList);
 			model.addAttribute("postVo", postVo);
+			model.addAttribute("categoryVo", categoryVo);
 
 			return "/blog/blog-main";
 		} else {
@@ -108,12 +112,13 @@ public class BlogController {
 		categoryVo.setCateNo(cateNo);
 		BlogVo blogVo = blogService.getBlogVo(id);
 		List<CategoryVo> categoryList = blogService.getList(id);
-
+		
 		PostVo postVo = blogService.getPostTop(cateNo);// 최상단 포스트
 		model.addAttribute("postList", postList);
 		model.addAttribute("postVo", postVo);
 		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("categoryVo", categoryVo);
 
 		return "/blog/blog-main";
 	}

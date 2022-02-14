@@ -52,6 +52,8 @@ public class BlogService {
 		List<PostVo> postList = postDao.getPostList(categoryVo.getCateNo());
 
 		bMap.put("postList", postList);
+		
+		bMap.put("categoryVo", categoryVo);
 
 		// 가장 최신 포스트(메인화면용, 가장 위의 카테고리의 가장 최신 글)
 		PostVo postVo = postDao.getPostTop(categoryVo.getCateNo());
